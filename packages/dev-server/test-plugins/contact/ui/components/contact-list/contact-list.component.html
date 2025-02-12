@@ -1,0 +1,43 @@
+
+  <vdr-data-table-2
+    id="contact-list"
+    [items]="items$ | async"
+    [itemsPerPage]="itemsPerPage$ | async"
+    [totalItems]="totalItems$ | async"
+    [currentPage]="currentPage$ | async"
+    (pageChange)="setPageNumber($event)"
+    (itemsPerPageChange)="setItemsPerPage($event)"
+  >
+      <vdr-bulk-action-menu locationId="contact-list" [hostComponent]="this"
+        [selectionManager]="selectionManager" />
+
+    <vdr-dt2-search
+      [searchTermControl]="searchTermControl"
+      searchTermPlaceholder="Search by email"
+    ></vdr-dt2-search>
+
+
+    <vdr-dt2-column id="id" heading="ID">
+      <ng-template let-contact="item">{{ contact.id }}</ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column id="fullName" heading="Full Name" [sort]="sorts.get('fullName')">
+      <ng-template let-contact="item">{{ contact.fullName }}</ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column id="email" heading="Email" [sort]="sorts.get('email')">
+      <ng-template let-contact="item">{{ contact.email }}</ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column id="companyName" heading="Company Name" [sort]="sorts.get('companyName')">
+      <ng-template let-contact="item">{{ contact.companyName }}</ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column id="message" heading="Message">
+      <ng-template let-contact="item">{{ contact.message }}</ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column id="businessPhone" heading="Business Phone">
+      <ng-template let-contact="item">{{ contact.businessPhone }}</ng-template>
+    </vdr-dt2-column>
+  </vdr-data-table-2>

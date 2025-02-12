@@ -33,10 +33,10 @@ export const routes: Route[] = [
                 path: 'marketing',
                 loadChildren: () => import('@vendure/admin-ui/marketing').then(m => m.MarketingModule),
             },
-            {
-                path: 'settings',
-                loadChildren: () => import('@vendure/admin-ui/settings').then(m => m.SettingsModule),
-            },
+            // {
+            //     path: 'settings',
+            //     loadChildren: () => import('@vendure/admin-ui/settings').then(m => m.SettingsModule),
+            // },
             {
                 path: 'system',
                 loadChildren: () => import('@vendure/admin-ui/system').then(m => m.SystemModule),
