@@ -1,0 +1,7 @@
+:host ::ng-deep .input-row.invalid {
+    flex-direction: column !important;
+    .helper-text {
+        color: #ee2020;
+        display: block;
+    }
+}

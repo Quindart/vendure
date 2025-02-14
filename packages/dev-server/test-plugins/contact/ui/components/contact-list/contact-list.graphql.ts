@@ -14,3 +14,13 @@ query GetAllContact($options: ContactListOptions ){
         totalItems
     }
 }`
+
+
+export const DELETE_CONTACT = gql`
+mutation DeleteContacts($ids: [ID!]!) {
+        deleteContacts(ids: $ids) {
+            result
+            message
+        }
+    }
+`;

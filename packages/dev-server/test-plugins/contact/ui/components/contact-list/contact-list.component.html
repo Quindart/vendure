@@ -1,5 +1,12 @@
-
-  <vdr-data-table-2
+<vdr-page-block>
+    <vdr-action-bar>
+        <vdr-ab-left>All contacts</vdr-ab-left>
+        <vdr-ab-right>
+            <button class="button primary" [routerLink]="['/extensions/contact','create']">New contact</button>
+        </vdr-ab-right>
+    </vdr-action-bar>
+</vdr-page-block>
+<vdr-data-table-2
     id="contact-list"
     [items]="items$ | async"
     [itemsPerPage]="itemsPerPage$ | async"
@@ -26,7 +33,12 @@
     </vdr-dt2-column>
 
     <vdr-dt2-column id="email" heading="Email" [sort]="sorts.get('email')">
-      <ng-template let-contact="item">{{ contact.email }}</ng-template>
+      <ng-template let-contact="item">
+        <a class="button-ghost" [routerLink]="['/extensions/contact',contact.id]">
+        {{ contact.email }}
+        </a>
+      </ng-template>
+      
     </vdr-dt2-column>
 
     <vdr-dt2-column id="companyName" heading="Company Name" [sort]="sorts.get('companyName')">

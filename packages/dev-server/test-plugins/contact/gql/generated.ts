@@ -5180,7 +5180,6 @@ export type Query = {
   facets: FacetList;
   fulfillmentHandlers: Array<ConfigurableOperationDefinition>;
   getAllContact: ContactList;
-  getAllContacts?: Maybe<Array<Maybe<ContactResponse>>>;
   getContactByEmail?: Maybe<Array<Maybe<ContactResponse>>>;
   getContactById?: Maybe<ContactResponse>;
   globalSettings: GlobalSettings;

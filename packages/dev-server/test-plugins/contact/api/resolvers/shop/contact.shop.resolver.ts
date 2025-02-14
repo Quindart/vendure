@@ -1,8 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Allow, Ctx, Permission, RequestContext } from '@vendure/core';
 
-import { Contact } from '../entities/contact.entity';
-import { ContactService } from '../services/contact.service';
+import { Contact } from '../../../entities/contact.entity';
+import { ContactService } from '../../../services/contact.service';
+
 
 @Resolver(() => Contact)
 export class ContactShopResolver {

@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { DeletionResult } from '@vendure/common/lib/generated-types';
 import { ListQueryBuilder, RequestContext, TransactionalConnection } from '@vendure/core';
 
 import { Contact } from '../entities/contact.entity';
+
 
 @Injectable()
 export class ContactService {
@@ -17,7 +19,6 @@ export class ContactService {
             const sql = this.listQueryBuilder.build(Contact, args.options || undefined, {
                 ctx,
             });
-
             return await sql.getManyAndCount().then(([items, totalItems]) => {
                 return { items, totalItems };
             });
@@ -64,6 +65,29 @@ export class ContactService {
             return null
         }
     }
+    async deleteContacts(ctx: RequestContext, args: any) {
+        try {
+            return await Promise.all(args.ids
+                .map(async (id: string) => {
+                    const contact_deleted = await this.connection.getRepository(ctx, Contact).findOne({ where: { id: `${id}` } });
+                    // if (contact_deleted === null) {
+                    //     return {
+                    //         result: DeletionResult.NOT_DELETED,
+                    //         message: `Contact ID #${id} not found`
+                    //     }
+                    // } else {
+                    await this.connection.getRepository(ctx, Contact).delete({ id: `${id}` })
+                    return {
+                        result: DeletionResult.DELETED,
+                        message: `Contact info ${contact_deleted?.fullName as string} - ${contact_deleted?.email as string} deleted successfully`,
+                        //     };
+                    }
+                }))
+        } catch (error) {
+            return null
+        }
+    }
+
     async createContact(ctx: RequestContext, input: any) {
         if (!input) {
             throw new Error('Missing input data');

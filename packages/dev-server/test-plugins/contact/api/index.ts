@@ -1,1 +1,1 @@
-export * from './schema-extension'
+export * from './schema/schema-extension'

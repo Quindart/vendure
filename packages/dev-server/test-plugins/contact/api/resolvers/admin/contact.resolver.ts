@@ -1,8 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Allow, Ctx, Permission, RequestContext } from '@vendure/core';
 
-import { Contact } from '../entities/contact.entity';
-import { ContactService } from '../services/contact.service';
+import { Contact } from '../../../entities/contact.entity';
+import { ContactService } from '../../../services/contact.service';
+
 
 @Resolver(() => Contact)
 export class ContactResolver {
@@ -55,6 +56,18 @@ export class ContactResolver {
     ) {
         try {
             const rs = await this.contactService.deleteContactById(ctx, input)
+            return rs
+        } catch (error) {
+            return false
+        }
+    }
+    @Mutation()
+    async deleteContacts(
+        @Ctx() ctx: RequestContext,
+        @Args() input: any
+    ) {
+        try {
+            const rs = await this.contactService.deleteContacts(ctx, input)
             return rs
         } catch (error) {
             return false

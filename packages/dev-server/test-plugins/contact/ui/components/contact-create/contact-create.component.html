@@ -1,0 +1,46 @@
+    <form [formGroup]="contactForm">
+     <vdr-card>
+                <div class="form-grid">
+                    <vdr-form-field label="FullName" for="fullName">
+                        <input id="fullName" type="text" formControlName="fullName" />
+                        <div *ngIf="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.dirty" id="fullNameError" class="error">
+                             <div class="helper-text" *ngIf="contactForm.get('fullName')?.errors?.['required']">Full Name is required.</div>
+                             <div class="helper-text" *ngIf="contactForm.get('fullName')?.errors?.['pattern']">Full Name must be any words</div>
+                        </div>
+                    </vdr-form-field>
+                    <vdr-form-field label="Email" for="email">
+                        <input id="email" type="text" min="1" max="5" formControlName="email" />
+                            <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.dirty" id="emailError" class="error">
+                                <div  class="helper-text" *ngIf="contactForm.get('email')?.hasError('required')">Email is required.</div>
+                                 <div  class="helper-text" *ngIf="contactForm.get('email')?.hasError('email')">Email must be a valid email address.</div>
+                            </div>
+                    </vdr-form-field>
+                       <vdr-form-field label="Business phone" for="businessPhone">
+                        <input id="businessPhone" type="text" formControlName="businessPhone" />
+                        <div   class="helper-text" *ngIf="contactForm.get('businessPhone')?.invalid && (contactForm.get('businessPhone')?.dirty || contactForm.get('businessPhone')?.touched)" id="businessPhoneError" class="error">
+                        <div   class="helper-text" *ngIf="contactForm.get('businessPhone')?.hasError('required')">Business Phone is required.</div>
+                        </div>
+                    </vdr-form-field>
+                    <vdr-form-field label="Company name" for="companyName">
+                        <input id="companyName" type="text" min="1" max="5" formControlName="companyName" />
+                        <div *ngIf="contactForm.get('companyName')?.invalid && contactForm.get('companyName')?.dirty" id="companyNameError" class="error">
+                               <div  class="helper-text" *ngIf="contactForm.get('companyName')?.hasError('required')">Company Name is required.</div>
+                               <div  class="helper-text" *ngIf="contactForm.get('companyName')?.hasError('pattern')">Company Name must be any words.</div>
+                        </div>
+                    </vdr-form-field>
+                      <vdr-form-field label="Message" for="message">
+                        <textarea id="message" type="text" min="1" max="5" formControlName="message"></textarea>
+                        <div   class="helper-text" *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.dirty" id="messageError" class="error">
+                            <div   class="helper-text" *ngIf="contactForm.get('message')?.hasError('required')">Message is required.</div>
+                        </div>
+                    </vdr-form-field>
+                    <div style=" display: flex; justify-content: flex-end; align-items: flex-end;">
+                    <button class="btn btn-primary ml-0"
+                    (click)="onSubmit()"
+                    [disabled]="contactForm.pristine || contactForm.invalid"
+                    >Create contact</button>
+                    </div>
+                </div>
+    </vdr-card>
+</form>
+

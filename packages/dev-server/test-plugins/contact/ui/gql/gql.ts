@@ -14,9 +14,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n  fragment ContactFragment on ContactResponse {\n    id\n    fullName\n    email\n    companyName\n    message\n    businessPhone\n  }\n": typeof types.ContactFragmentFragmentDoc,
+    "\n\n\nquery GetContactById($id: ID!){\n    getContactById(id: $id){\n        ...ContactFragment\n    }\n}\n": typeof types.GetContactByIdDocument,
     "\nquery GetAllContact($options: ContactListOptions ){\n    getAllContact(options: $options){\n        items{\n            fullName\n            id\n            email\n            companyName\n            message\n            businessPhone\n        }\n        totalItems\n    }\n}": typeof types.GetAllContactDocument,
 };
 const documents: Documents = {
+    "\n  fragment ContactFragment on ContactResponse {\n    id\n    fullName\n    email\n    companyName\n    message\n    businessPhone\n  }\n": types.ContactFragmentFragmentDoc,
+    "\n\n\nquery GetContactById($id: ID!){\n    getContactById(id: $id){\n        ...ContactFragment\n    }\n}\n": types.GetContactByIdDocument,
     "\nquery GetAllContact($options: ContactListOptions ){\n    getAllContact(options: $options){\n        items{\n            fullName\n            id\n            email\n            companyName\n            message\n            businessPhone\n        }\n        totalItems\n    }\n}": types.GetAllContactDocument,
 };
 
@@ -34,6 +38,14 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ContactFragment on ContactResponse {\n    id\n    fullName\n    email\n    companyName\n    message\n    businessPhone\n  }\n"): (typeof documents)["\n  fragment ContactFragment on ContactResponse {\n    id\n    fullName\n    email\n    companyName\n    message\n    businessPhone\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\n\nquery GetContactById($id: ID!){\n    getContactById(id: $id){\n        ...ContactFragment\n    }\n}\n"): (typeof documents)["\n\n\nquery GetContactById($id: ID!){\n    getContactById(id: $id){\n        ...ContactFragment\n    }\n}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

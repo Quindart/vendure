@@ -3,12 +3,13 @@ import { PluginCommonModule, VendurePlugin } from '@vendure/core';
 import { AdminUiExtension } from '@vendure/ui-devkit/compiler';
 import path from 'path';
 
-import { ContactResolver } from './api/contact.resolver';
-import { adminApiExtensions, shopApiExtensions } from './api/schema-extension';
+
+import { ContactResolver } from './api/resolvers/admin/contact.resolver';
+import { ContactShopResolver } from './api/resolvers/shop/contact.shop.resolver';
+import { adminApiExtensions, shopApiExtensions } from './api/schema/schema-extension';
 import { Contact } from './entities/contact.entity';
 import { ContactService } from './services/contact.service';
 // eslint-disable-next-line import/order
-import { ContactShopResolver } from './api/contact.shop.resolver';
 
 @VendurePlugin({
     imports: [PluginCommonModule],

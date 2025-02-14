@@ -23,7 +23,6 @@ export class ContactListComponent extends TypedBaseListComponent<typeof GetAllCo
             filterField: 'fullName',
         })
         .connectToRoute(this.route);
-
     readonly sorts = this.createSortCollection()
         .defaultSort('id', 'ASC')
         .addSort({ name: 'email' })
@@ -53,7 +52,6 @@ export class ContactListComponent extends TypedBaseListComponent<typeof GetAllCo
                 },
             }),
             refreshListOnChanges: [this.filters.valueChanges, this.sorts.valueChanges],
-
         });
     }
 }

@@ -1,6 +1,6 @@
-import { addActionBarItem, addNavMenuItem, addNavMenuSection, registerDataTableComponent } from "@vendure/admin-ui/core";
-// import { TableContactList } from "./components/contact-list/table.component";
+import { addActionBarItem, addNavMenuItem, addNavMenuSection, registerBulkAction, registerDataTableComponent } from "@vendure/admin-ui/core";
 
+import { deleteContactListBulkAction } from "./components/contact-list/contact-list.bulk-action";
 export default [
     addNavMenuSection(
         {
@@ -17,9 +17,5 @@ export default [
         },
         'contact',
     ),
-    // registerDataTableComponent({
-    //     component: TableContactList,
-    //     tableId: 'contact-list',
-    //     columnId: 'slug',
-    // }),
+    registerBulkAction(deleteContactListBulkAction)
 ]

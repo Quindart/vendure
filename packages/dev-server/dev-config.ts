@@ -17,7 +17,7 @@ import { ElasticsearchPlugin } from '@vendure/elasticsearch-plugin';
 import { defaultEmailHandlers, EmailPlugin, FileBasedTemplateLoader } from '@vendure/email-plugin';
 import { BullMQJobQueuePlugin } from '@vendure/job-queue-plugin/package/bullmq';
 import 'dotenv/config';
-import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
+import { compileUiExtensions, setBranding } from '@vendure/ui-devkit/compiler';
 import path from 'path';
 import { DataSourceOptions } from 'typeorm';
 
@@ -64,8 +64,6 @@ export const devConfig: VendureConfig = {
     paymentOptions: {
         paymentMethodHandlers: [dummyPaymentHandler],
     },
-
-    customFields: {},
     importExportOptions: {
         importAssetsDir: path.join(__dirname, 'import-assets'),
     },
@@ -103,10 +101,23 @@ export const devConfig: VendureConfig = {
         AdminUiPlugin.init({
             route: 'admin',
             port: 5001,
+            adminUiConfig: {
+                brand: 'Gamora',
+                // hideVendureBranding: true,
+                // hideVersion: true,
+            },
             app: compileUiExtensions({
                 outputPath: path.join(__dirname, './custom-admin-ui'),
                 extensions: [
-                    ContactPlugin.uiExtensions
+                    setBranding({
+                        smallLogoPath: path.join(__dirname, './assets/images/logo.PNG'),
+                        largeLogoPath: path.join(__dirname, './assets/images/logo.PNG'),
+                    }),
+                    {
+                        globalStyles: path.join(__dirname, './theme/global.scss'),
+                        sassVariableOverrides: path.join(__dirname, './theme/variables.scss')
+                    },
+                    ContactPlugin.uiExtensions,
                 ],
                 devMode: true,
             })
